@@ -12,6 +12,8 @@ class EstablishmentSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class PromotionSerializer(serializers.ModelSerializer):
+    establishment = serializers.StringRelatedField(read_only=True)
+    
     class Meta:
         model= Promotion
         fields = '__all__'

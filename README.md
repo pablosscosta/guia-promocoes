@@ -1,137 +1,85 @@
-# 📘 Guia de Promoções
+# Guia de Promoções
 
----
+Este é o Produto Mínimo Viável (MVP) do aplicativo "Guia de Promoções". O objetivo desta versão é apresentar uma plataforma funcional para listar estabelecimentos e suas promoções associadas. **O cadastro de dados (categorias, estabelecimentos e promoções) é feito via painel administrativo do Django ou através de requisições diretas à API.**
 
-## 🧭 Visão Geral
+## Funcionalidades do MVP
 
-Bem-vindo ao **Guia de Promoções**! Este é um sistema web intuitivo desenvolvido para centralizar e organizar promoções de restaurantes e bares. O objetivo é ajudar você a descobrir facilmente as melhores ofertas para sair, seja para um almoço casual ou uma noite divertida.
+Atualmente, o aplicativo oferece as seguintes funcionalidades:
 
-Este projeto está sendo desenvolvido como um **Produto Mínimo Viável (MVP)**, com foco nas funcionalidades essenciais de cadastro e visualização de promoções e estabelecimentos.
+* **Home:** Página inicial de boas-vindas com links de navegação para as demais seções.
+* **Listagem de Estabelecimentos:** Visualização de todos os estabelecimentos cadastrados, incluindo nome, telefone e endereço.
+* **Listagem de Promoções:** Visualização de todas as promoções, com título, descrição e o estabelecimento associado.
 
----
+## Tecnologias
 
-## 🧰 Tecnologias Utilizadas
+* **Backend:** Django, Django REST Framework
+* **Frontend:** Vue.js 3 (com Composition API), Vite, Tailwind CSS, Axios, Vue Router
+* **Banco de Dados:** SQLite (padrão Django, para desenvolvimento)
 
-- **Backend:** [Django](https://www.djangoproject.com/)
-- **Frontend:** [Vue.js](https://vuejs.org/)
-- **Ferramenta de Build (Frontend):** [Vite](https://vitejs.dev/)
-- **Banco de Dados:** SQLite (para desenvolvimento, com planos de usar PostgreSQL em produção)
-- **Controle de Versão:** Git & GitHub
+## Como Rodar o Projeto
 
----
+Siga os passos abaixo para configurar e executar o projeto em sua máquina local.
 
-## 💻 Como Rodar o Projeto Localmente
+### Pré-requisitos
 
-Siga os passos abaixo para configurar e rodar o **Guia de Promoções** em sua máquina local.
+* Python 3.8+
+* pip (gerenciador de pacotes Python)
+* Node.js (LTS recomendado)
+* npm (gerenciador de pacotes Node.js)
 
-### ✅ Pré-requisitos
+### Configuração do Backend (Django)
 
-Certifique-se de ter instalado:
+1.  Navegue até a pasta `backend`:
+    ```bash
+    cd backend
+    ```
+2.  Crie e ative um ambiente virtual (recomendado):
+    ```bash
+    python -m venv venv
+    # No Windows:
+    # .\venv\Scripts\activate
+    # No macOS/Linux:
+    # source venv/bin/activate
+    ```
+3.  Instale as dependências Python a partir do `requirements.txt`:
+    ```bash
+    pip install -r requirements.txt
+    ```
+4.  Execute as migrações do banco de dados:
+    ```bash
+    python manage.py migrate
+    ```
+5.  Crie um superusuário para acessar o painel Admin (se ainda não tiver):
+    ```bash
+    python manage.py createsuperuser
+    ```
+6.  Popule o banco de dados com dados iniciais (categorias, estabelecimentos, promoções) usando o painel Django Admin (`/admin/`) ou ferramentas como Postman.
+7.  Inicie o servidor Django:
+    ```bash
+    python manage.py runserver
+    ```
+    O backend estará acessível em `http://127.0.0.1:8000/`.
 
-- **Python 3.9 ou superior**
-- **Node.js 16 ou superior**
-- **npm ou Yarn**
-- **Git**
+### Configuração do Frontend (Vue.js)
 
-### ⚙️ Backend (Django)
+1.  Abra um **novo terminal** e navegue até a pasta `frontend`:
+    ```bash
+    cd frontend
+    ```
+2.  Instale as dependências Node.js:
+    ```bash
+    npm install
+    ```
+3.  Inicie o servidor de desenvolvimento Vue.js:
+    ```bash
+    npm run dev
+    ```
+    O frontend estará acessível em `http://localhost:5173/`.
 
-1. **Clone o repositório:**
-   ```bash
-   git clone https://github.com/seu-usuario/guia-de-promocoes.git
-   cd guia-de-promocoes/backend
-   ```
+## Uso
 
-2. **Crie e ative um ambiente virtual:**
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # No Windows use `venv\Scripts\activate`
-   ```
+Após iniciar ambos os servidores (backend e frontend), acesse `http://localhost:5173/` em seu navegador para interagir com o aplicativo. Os links de navegação para **Estabelecimentos** e **Promoções** estarão disponíveis na página inicial.
 
-3. **Instale as dependências do Django:**
-   ```bash
-   pip install -r requirements.txt
-   ```
+## Autor
 
-4. **Execute as migrações do banco de dados:**
-   ```bash
-   python manage.py migrate
-   ```
-
-5. **Crie um superusuário (opcional, para acesso ao admin do Django):**
-   ```bash
-   python manage.py createsuperuser
-   ```
-
-6. **Inicie o servidor Django:**
-   ```bash
-   python manage.py runserver
-   ```
-   O backend estará disponível em `http://127.0.0.1:8000/`.
-
-### 🖥️ Frontend (Vue.js + Vite)
-
-1. **Acesse o diretório do frontend:**
-   ```bash
-   cd ../frontend
-   ```
-
-2. **Instale as dependências do Node.js:**
-   ```bash
-   npm install  # ou yarn install
-   ```
-
-3. **Inicie o servidor de desenvolvimento:**
-   ```bash
-   npm run dev  # ou yarn dev
-   ```
-   O frontend estará disponível em `http://localhost:5173/` (a porta pode variar).
-
----
-
-## 📁 Estrutura do Projeto
-
-```
-guia-de-promocoes/
-├── backend/                  # Projeto Django (API)
-│   ├── guia_de_promocoes/    # Configurações globais do Django
-│   ├── core/                 # Aplicativos Django (ex: promoções, estabelecimentos)
-│   ├── manage.py             # Utilitário de linha de comando do Django
-│   └── requirements.txt      # Dependências Python
-├── frontend/                 # Projeto Vue.js (SPA)
-│   ├── public/               # Arquivos estáticos públicos
-│   ├── src/                  # Código-fonte Vue.js (componentes, rotas, stores)
-│   ├── package.json          # Dependências Node.js
-│   └── vite.config.js        # Configuração do Vite
-├── .gitignore                # Arquivos a serem ignorados pelo Git
-├── LICENSE                   # Licença do projeto
-└── README.md                 # Este arquivo
-```
-
----
-
-## 🛣️ Roadmap (Pós-MVP)
-
-- Autenticação de usuários
-- Filtros avançados e pesquisa
-- Funcionalidade de "favoritar" promoções
-- Integração com mapas
-- Sistema de avaliação/comentários
-- Deploy em ambiente de produção
-
----
-
-## 🤝 Como Contribuir
-
-Contribuições são bem-vindas! Siga estas etapas:
-
-1. Faça um fork do projeto.
-2. Crie uma branch (`git checkout -b feature/sua-feature`).
-3. Faça suas alterações e commit (`git commit -m 'feat: adiciona nova funcionalidade'`).
-4. Envie para o seu fork (`git push origin feature/sua-feature`).
-5. Abra um Pull Request.
-
----
-
-## 📜 Licença
-
-Este projeto está licenciado sob a **Licença MIT**. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+[Pablo S. S. Costa](https://github.com/pablosscosta/) / [LinkedIn](https://www.linkedin.com/in/pablosilva013/)
