@@ -7,7 +7,7 @@ class Category(models.Model):
         verbose_name_plural = "Categories"
 
     def __str__(self):
-        return f"{self.name}"
+        return f"{self.id}: {self.name}"
     
 class Establishment(models.Model):
     name=models.CharField(max_length=100)
