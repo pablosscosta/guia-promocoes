@@ -80,6 +80,12 @@ Siga os passos abaixo para configurar e executar o projeto em sua máquina local
 
 Após iniciar ambos os servidores (backend e frontend), acesse `http://localhost:5173/` em seu navegador para interagir com o aplicativo. Os links de navegação para **Estabelecimentos** e **Promoções** estarão disponíveis na página inicial.
 
+
+## Próximos Passos
+
+Este projeto está em evolução contínua. Novas funcionalidades e melhorias serão implementadas nas próximas versões.
+
+
 ## Autor
 
 [Pablo S. S. Costa](https://github.com/pablosscosta/) / [LinkedIn](https://www.linkedin.com/in/pablosilva013/)
