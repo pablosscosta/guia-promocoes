@@ -1,91 +1,133 @@
-# Guia de Promoções
+# 📘 Guia de Promoções
 
-Este é o Produto Mínimo Viável (MVP) do aplicativo "Guia de Promoções". O objetivo desta versão é apresentar uma plataforma funcional para listar estabelecimentos e suas promoções associadas. **O cadastro de dados (categorias, estabelecimentos e promoções) é feito via painel administrativo do Django ou através de requisições diretas à API.**
+Aplicação web para listar promoções de bares e restaurantes por região.  
+Desenvolvida com Django no backend e Vue.js no frontend, com consumo via API e painel administrativo.
 
-## Funcionalidades do MVP
+---
 
-Atualmente, o aplicativo oferece as seguintes funcionalidades:
+## 📌 Visão Geral / Contexto
 
-* **Home:** Página inicial de boas-vindas com links de navegação para as demais seções.
-* **Listagem de Estabelecimentos:** Visualização de todos os estabelecimentos cadastrados, incluindo nome, telefone e endereço.
-* **Listagem de Promoções:** Visualização de todas as promoções, com título, descrição e o estabelecimento associado.
+Este projeto foi criado para facilitar a divulgação de promoções locais em estabelecimentos gastronômicos.  
+Permite que usuários visualizem ofertas por região, enquanto o cadastro é feito por administradores via painel Django ou requisições autenticadas.  
+É voltado para empreendedores, gestores de bares e restaurantes, e profissionais de marketing local.
 
-## Tecnologias
+---
 
-* **Backend:** Django, Django REST Framework
-* **Frontend:** Vue.js 3 (com Composition API), Vite, Tailwind CSS, Axios, Vue Router
-* **Banco de Dados:** SQLite (padrão Django, para desenvolvimento)
+## 📊 Status do Projeto
 
-## Como Rodar o Projeto
+- 🧪 MVP funcional
+
+---
+
+## 🚀 Tecnologias Utilizadas
+
+- Python  
+- Django  
+- Vue.js  
+- TypeScript  
+- HTML  
+- CSS  
+- PostgreSQL 
+- Django REST Framework
+
+---
+
+## 🛠️ Funcionalidades
+
+- [x] Listagem de promoções por região  
+- [x] Cadastro de estabelecimentos via Django Admin ou API  
+- [x] Painel administrativo para gestão de dados  
+- [x] Integração frontend-backend via API REST  
+- [ ] Interface pública para cadastro (planejada)
+
+---
+
+## 🧪 Como Rodar o Projeto
 
 Siga os passos abaixo para configurar e executar o projeto em sua máquina local.
 
-### Pré-requisitos
+### 🔧 Pré-requisitos
 
-* Python 3.8+
-* pip (gerenciador de pacotes Python)
-* Node.js (LTS recomendado)
-* npm (gerenciador de pacotes Node.js)
+- Python 3.8+  
+- pip (gerenciador de pacotes Python)  
+- Node.js (LTS recomendado)  
+- npm (gerenciador de pacotes Node.js)
 
-### Configuração do Backend (Django)
+---
 
-1.  Navegue até a pasta `backend`:
-    ```bash
-    cd backend
-    ```
-2.  Crie e ative um ambiente virtual (recomendado):
-    ```bash
-    python -m venv venv
-    # No Windows:
-    # .\venv\Scripts\activate
-    # No macOS/Linux:
-    # source venv/bin/activate
-    ```
-3.  Instale as dependências Python a partir do `requirements.txt`:
-    ```bash
-    pip install -r requirements.txt
-    ```
-4.  Execute as migrações do banco de dados:
-    ```bash
-    python manage.py migrate
-    ```
-5.  Crie um superusuário para acessar o painel Admin (se ainda não tiver):
-    ```bash
-    python manage.py createsuperuser
-    ```
-6.  Popule o banco de dados com dados iniciais (categorias, estabelecimentos, promoções) usando o painel Django Admin (`/admin/`) ou ferramentas como Postman.
-7.  Inicie o servidor Django:
-    ```bash
-    python manage.py runserver
-    ```
-    O backend estará acessível em `http://127.0.0.1:8000/`.
+### ⚙️ Configuração do Backend (Django)
 
-### Configuração do Frontend (Vue.js)
+```bash
+# Navegue até a pasta backend
+cd backend
 
-1.  Abra um **novo terminal** e navegue até a pasta `frontend`:
-    ```bash
-    cd frontend
-    ```
-2.  Instale as dependências Node.js:
-    ```bash
-    npm install
-    ```
-3.  Inicie o servidor de desenvolvimento Vue.js:
-    ```bash
-    npm run dev
-    ```
-    O frontend estará acessível em `http://localhost:5173/`.
+# Crie e ative um ambiente virtual (recomendado)
+python -m venv venv
 
-## Uso
+# No Windows:
+.\venv\Scripts\activate
 
-Após iniciar ambos os servidores (backend e frontend), acesse `http://localhost:5173/` em seu navegador para interagir com o aplicativo. Os links de navegação para **Estabelecimentos** e **Promoções** estarão disponíveis na página inicial.
+# No macOS/Linux:
+source venv/bin/activate
 
+# Instale as dependências
+pip install -r requirements.txt
 
-## Próximos Passos
+# Execute as migrações
+python manage.py migrate
 
-Este projeto está em evolução contínua. Novas funcionalidades e melhorias serão implementadas nas próximas versões.
+# Crie um superusuário
+python manage.py createsuperuser
 
+# Inicie o servidor
+python manage.py runserver
+```
 
-## Autor
+- O backend estará acessível em: [http://127.0.0.1:8000/](http://127.0.0.1:8000/)  
+- Popule o banco de dados com dados iniciais via Django Admin (`/admin/`) ou ferramentas como Postman.
 
-[Pablo S. S. Costa](https://github.com/pablosscosta/) / [LinkedIn](https://www.linkedin.com/in/pablosilva013/)
+---
+
+### 🎨 Configuração do Frontend (Vue.js)
+
+```bash
+# Abra um novo terminal e navegue até a pasta frontend
+cd frontend
+
+# Instale as dependências
+npm install
+
+# Inicie o servidor de desenvolvimento
+npm run dev
+```
+
+- O frontend estará acessível em: [http://localhost:5173/](http://localhost:5173/)
+
+---
+
+### 💻 Uso
+
+Após iniciar ambos os servidores (backend e frontend), acesse [http://localhost:5173/](http://localhost:5173/) em seu navegador para interagir com o aplicativo.  
+Os links de navegação para **Estabelecimentos** e **Promoções** estarão disponíveis na página inicial.
+
+---
+
+## ⏭️ Próximas Etapas
+
+- [ ] Criar interface pública para cadastro de promoções  
+- [ ] Implementar autenticação de usuários finais  
+- [ ] Melhorar responsividade do frontend
+
+---
+
+## 📄 Licença
+
+Este projeto está licenciado sob a [MIT License](LICENSE).
+
+---
+
+## 👤 Autor / Contato
+
+**Pablo Sousa da Costa**  
+[LinkedIn](https://www.linkedin.com/in/pablosilva013/)  
+📧 pablosousa013@gmail.com
