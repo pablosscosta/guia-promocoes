@@ -1,4 +1,6 @@
 from rest_framework import viewsets
+from rest_framework.permissions import AllowAny
+
 from .models import Category, Establishment, Promotion
 from .serializers import CategorySerializer, EstablishmentSerializer, PromotionSerializer
 
@@ -9,7 +11,9 @@ class CategoryViewSet(viewsets.ModelViewSet):
 class EstablishmentViewSet(viewsets.ModelViewSet):
     queryset = Establishment.objects.all()
     serializer_class = EstablishmentSerializer
+    permission_classes = [AllowAny]
 
 class PromotionViewSet(viewsets.ModelViewSet):
     queryset = Promotion.objects.all()
     serializer_class = PromotionSerializer
+    permission_classes = [AllowAny]

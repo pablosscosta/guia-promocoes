@@ -2,6 +2,21 @@
   <div class="container mx-auto p-4">
     <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">Nossos Estabelecimentos Parceiros</h1>
 
+    <div class="flex justify-center mb-6 space-x-4">
+      <button @click="showModal = true"
+              class="px-6 py-2 bg-blue-600 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700 transition-colors duration-300">
+        Cadastrar Estabelecimento
+      </button>
+      <router-link to="/"
+                   class="px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg shadow-md hover:bg-gray-600 transition-colors duration-300">
+        Retornar
+      </router-link>
+    </div>
+
+    <EstablishmentModal v-if="showModal"
+                        @close="showModal = false"
+                        @saved="onEstablishmentSaved" />
+
     <p v-if="loading" class="text-center text-lg text-blue-600">Carregando estabelecimentos...</p>
     <p v-else-if="error" class="text-center text-lg text-red-600">Erro ao carregar estabelecimentos: {{ error.message }}</p>
 
@@ -29,10 +44,12 @@
 <script setup>
 import axios from 'axios';
 import { ref, onMounted } from 'vue';
+import EstablishmentModal from '../../components/EstablishmentModal.vue'
 
 const establishments = ref([]);
 const loading = ref(true);
 const error = ref(null)
+const showModal = ref(false)
 
 onMounted(async () => {
   try {
@@ -45,4 +62,13 @@ onMounted(async () => {
     loading.value = false;
   }
 });
+
+function onEstablishmentSaved() {
+  loading.value = true;
+  axios.get('establishments/')
+    .then(res => establishments.value = res.data)
+    .catch(err => error.value = err)
+    .finally(() => loading.value = false);
+}
+
 </script>

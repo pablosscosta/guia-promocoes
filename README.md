@@ -15,7 +15,6 @@ Permite que usuários visualizem ofertas por região, enquanto o cadastro é fei
 
 ## 📊 Status do Projeto
 
-- 🧪 MVP funcional  
 - 🚧 Em evolução, com novas funcionalidades planejadas  
 
 ---
@@ -231,7 +230,8 @@ guia-promocoes/
 
 ## ⏭️ Próximas Etapas
 
-- [ ] Criar interface pública para cadastro de estabelecimentos e promoções
+- [ ] 
+
 
 ---
 

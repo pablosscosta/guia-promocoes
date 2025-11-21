@@ -1,6 +1,24 @@
 <template>
   <div class="container mx-auto p-4">
-    <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">Promoções</h1>
+    <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">
+      Nossas Promoções
+    </h1>
+
+    <div class="flex justify-center mb-6 space-x-6">
+      <button @click="showModal = true"
+              class="px-6 py-2 bg-green-600 text-white font-semibold rounded-lg shadow-md hover:bg-green-700 transition-colors duration-300">
+        Cadastrar Promoção
+      </button>
+
+      <router-link to="/"
+                   class="px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg shadow-md hover:bg-gray-600 transition-colors duration-300">
+        Retornar
+      </router-link>
+    </div>
+
+    <PromotionModal v-if="showModal"
+                    @close="showModal = false"
+                    @saved="onPromotionSaved" />
 
     <p v-if="loading" class="text-center text-lg text-blue-600">Carregando promoções...</p>
     <p v-else-if="error" class="text-center text-lg text-red-600">Erro ao carregar promoções: {{ error.message }}</p>
@@ -23,10 +41,12 @@
 <script setup>
 import axios from 'axios';
 import { ref, onMounted } from 'vue';
+import PromotionModal from '../../components/PromotionModal.vue'
 
 const promotions = ref([]);
 const loading = ref(true);
 const error = ref(null)
+const showModal = ref(false)
 
 onMounted(async () => {
   try {
@@ -39,4 +59,11 @@ onMounted(async () => {
     loading.value = false;
   }
 });
+function onPromotionSaved() {
+  loading.value = true;
+  axios.get('promotions/')
+    .then(res => promotions.value = res.data)
+    .catch(err => error.value = err)
+    .finally(() => loading.value = false);
+}
 </script>
