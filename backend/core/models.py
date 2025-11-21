@@ -13,7 +13,7 @@ class Establishment(models.Model):
     name=models.CharField(max_length=100)
     phone_number=models.CharField(max_length=20)
     address=models.CharField(max_length=255)
-    categories=models.ManyToManyField(Category)
+    categories=models.ManyToManyField(Category, blank=True)
 
     def __str__(self):
         return f"{self.name}"
