@@ -16,6 +16,36 @@ Permite que usuários visualizem ofertas por região, enquanto o cadastro é fei
 ## 📊 Status do Projeto
 
 - 🧪 MVP funcional
+<<<<<<< HEAD
+=======
+
+---
+
+## 🚀 Tecnologias Utilizadas
+
+- Python  
+- Django  
+- Vue.js  
+- TypeScript  
+- HTML  
+- CSS  
+- PostgreSQL 
+- Django REST Framework
+
+---
+
+## 🛠️ Funcionalidades
+
+- [x] Listagem de promoções por região  
+- [x] Cadastro de estabelecimentos via Django Admin ou API  
+- [x] Painel administrativo para gestão de dados  
+- [x] Integração frontend-backend via API REST  
+- [ ] Interface pública para cadastro (planejada)
+
+---
+
+## 🧪 Como Rodar o Projeto
+>>>>>>> b31f9c2b36b11b717f23444d64cd5c23d51fa457
 
 ---
 
@@ -46,6 +76,7 @@ Permite que usuários visualizem ofertas por região, enquanto o cadastro é fei
 Siga os passos abaixo para configurar e executar o projeto em sua máquina local.
 
 ### 🔧 Pré-requisitos
+<<<<<<< HEAD
 - Python 3.8+  
 - pip (gerenciador de pacotes Python)  
 - Node.js (LTS recomendado)  
@@ -149,10 +180,54 @@ Promoções vinculadas ao **Estabelecimento Genérico B** (ID = 2):
 
 > ⚠️ Observação: o campo `establishment` deve referenciar o **ID** retornado pelo cadastro dos estabelecimentos.
 
+=======
+
+- Python 3.8+  
+- pip (gerenciador de pacotes Python)  
+- Node.js (LTS recomendado)  
+- npm (gerenciador de pacotes Node.js)
+
+---
+
+### ⚙️ Configuração do Backend (Django)
+
+```bash
+# Navegue até a pasta backend
+cd backend
+
+# Crie e ative um ambiente virtual (recomendado)
+python -m venv venv
+
+# No Windows:
+.\venv\Scripts\activate
+
+# No macOS/Linux:
+source venv/bin/activate
+
+# Instale as dependências
+pip install -r requirements.txt
+
+# Execute as migrações
+python manage.py migrate
+
+# Crie um superusuário
+python manage.py createsuperuser
+
+# Inicie o servidor
+python manage.py runserver
+```
+
+- O backend estará acessível em: [http://127.0.0.1:8000/](http://127.0.0.1:8000/)  
+- Popule o banco de dados com dados iniciais via Django Admin (`/admin/`) ou ferramentas como Postman.
+>>>>>>> b31f9c2b36b11b717f23444d64cd5c23d51fa457
 
 ---
 
 ### 🎨 Configuração do Frontend (Vue.js)
+<<<<<<< HEAD
+=======
+
+>>>>>>> b31f9c2b36b11b717f23444d64cd5c23d51fa457
 ```bash
 # Abra um novo terminal e navegue até a pasta frontend
 cd frontend
@@ -164,14 +239,24 @@ npm install
 npm run dev
 ```
 
+<<<<<<< HEAD
 O frontend estará acessível em: **http://localhost:5173/**
+=======
+- O frontend estará acessível em: [http://localhost:5173/](http://localhost:5173/)
+>>>>>>> b31f9c2b36b11b717f23444d64cd5c23d51fa457
 
 ---
 
 ### 💻 Uso
+<<<<<<< HEAD
 Após iniciar ambos os servidores (backend e frontend), acesse **http://localhost:5173/** em seu navegador para interagir com o aplicativo.  
 Os links de navegação para **Estabelecimentos** e **Promoções** estarão disponíveis na página inicial.
 
+=======
+
+Após iniciar ambos os servidores (backend e frontend), acesse [http://localhost:5173/](http://localhost:5173/) em seu navegador para interagir com o aplicativo.  
+Os links de navegação para **Estabelecimentos** e **Promoções** estarão disponíveis na página inicial.
+>>>>>>> b31f9c2b36b11b717f23444d64cd5c23d51fa457
 
 ---
 
