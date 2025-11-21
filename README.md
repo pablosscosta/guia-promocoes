@@ -93,6 +93,7 @@ Popule o banco de dados com dados iniciais via **Django Admin (/admin/)** ou fer
 Após iniciar o servidor, você pode cadastrar dados fictícios para testes usando requisições **POST**.
 
 #### 📌 Endpoints disponíveis
+- Categorias: `http://127.0.0.1:8000/api/categories/`
 - Estabelecimentos: `http://127.0.0.1:8000/api/establishments/`  
 - Promoções: `http://127.0.0.1:8000/api/promotions/`  
 
@@ -101,9 +102,37 @@ Após iniciar o servidor, você pode cadastrar dados fictícios para testes usan
 #### 📌 Exemplo: Cadastro de Estabelecimentos
 ```json
 {
+  "name": "Bar"
+}
+```
+
+```json
+{
+  "name": "Restaurante"
+}
+```
+
+```json
+{
+  "name": "Pizzaria"
+}
+```
+
+```json
+{
+  "name": "Cafeteria"
+}
+```
+
+---
+
+#### 📌 Exemplo: Cadastro de Estabelecimentos
+```json
+{
   "name": "Estabelecimento Genérico A",
   "phone_number": "(00) 00000-0000",
-  "address": "Rua Exemplo, 100"
+  "address": "Rua Exemplo, 100",
+  "categories": [1]
 }
 ```
 
@@ -111,7 +140,8 @@ Após iniciar o servidor, você pode cadastrar dados fictícios para testes usan
 {
   "name": "Estabelecimento Genérico B",
   "phone_number": "(11) 11111-1111",
-  "address": "Avenida Modelo, 200"
+  "address": "Avenida Modelo, 200",
+  "categories": [2]
 }
 ```
 
@@ -152,7 +182,10 @@ Promoções vinculadas ao **Estabelecimento Genérico B** (ID = 2):
 }
 ```
 
-> ⚠️ Observação: o campo `establishment` deve referenciar o **ID** retornado pelo cadastro dos estabelecimentos.
+> ⚠️ Observação:
+
+- O campo `establishment` deve referenciar o **ID** retornado pelo cadastro dos estabelecimentos.
+- O campo `categories` deve referenciar os **IDs** das categorias previamente cadastradas.
 
 ---
 
@@ -198,11 +231,7 @@ guia-promocoes/
 
 ## ⏭️ Próximas Etapas
 
-- [ ] Criar interface pública para cadastro de promoções  
-- [ ] Implementar autenticação de usuários finais  
-- [ ] Melhorar responsividade do frontend  
-- [ ] Adicionar testes automatizados  
-- [ ] Documentar endpoints com Swagger ou DRF-YASG  
+- [ ] Criar interface pública para cadastro de estabelecimentos e promoções
 
 ---
 
