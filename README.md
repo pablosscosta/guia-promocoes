@@ -38,7 +38,9 @@ Permite que usuários visualizem ofertas por região, enquanto o cadastro é fei
 - [x] Cadastro de estabelecimentos via Django Admin ou API  
 - [x] Painel administrativo para gestão de dados  
 - [x] Integração frontend-backend via API REST  
-- [ ] Interface pública para cadastro (planejada)  
+- [x] Interface pública para cadastro (planejada)  
+- [x] Editar estabelecimentos e promoções
+- [ ] Deletar estabelecimentos e promoções  
  
 
 ---

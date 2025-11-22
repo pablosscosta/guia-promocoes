@@ -2,7 +2,9 @@
   <transition name="fade-scale">
     <div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
       <div class="bg-white rounded-lg shadow-lg w-full max-w-lg p-6 transform transition-all duration-300">
-        <h2 class="text-2xl font-bold mb-4">Cadastrar Estabelecimento</h2>
+        <h2 class="text-2xl font-bold mb-4">
+          {{ isEdit ? "Editar Estabelecimento" : "Cadastrar Estabelecimento" }}
+        </h2>
 
         <!-- Nome -->
         <input v-model="name" type="text" placeholder="Nome"
@@ -40,7 +42,7 @@
                   class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
                   :disabled="loading">
             <span v-if="loading">Salvando...</span>
-            <span v-else>Salvar</span>
+            <span v-else>{{ isEdit ? "Salvar alterações" : "Salvar" }}</span>
           </button>
         </div>
       </div>
@@ -49,10 +51,21 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed, watch } from "vue";
 import axios from "axios";
 
 const emit = defineEmits(["close", "saved"]);
+const props = defineProps<{
+  establishment?: {
+    id: number;
+    name: string;
+    phone_number: string;
+    address: string;
+    categories: { id: number; name: string }[];
+  };
+}>();
+
+const isEdit = computed(() => !!props.establishment);
 
 const name = ref("");
 const phone = ref("");
@@ -65,6 +78,17 @@ onMounted(async () => {
   const res = await axios.get("categories/");
   categories.value = res.data;
 });
+
+const hydrateFormFromProps = () => {
+  if (!props.establishment) return;
+  name.value = props.establishment.name;
+  phone.value = props.establishment.phone_number;
+  address.value = props.establishment.address;
+  selectedCategories.value = (props.establishment.categories || []).map(c => c.id);
+};
+
+onMounted(hydrateFormFromProps);
+watch(() => props.establishment, hydrateFormFromProps);
 
 function closeModal() {
   emit("close");
@@ -79,7 +103,13 @@ async function submitForm() {
       address: address.value,
       category_ids: selectedCategories.value,
     };
-    await axios.post("establishments/", payload);
+
+    if (isEdit.value && props.establishment) {
+      await axios.put(`establishments/${props.establishment.id}/`, payload);
+    } else {
+      await axios.post("establishments/", payload);
+    }
+
     emit("saved");
     closeModal();
   } catch (err) {
