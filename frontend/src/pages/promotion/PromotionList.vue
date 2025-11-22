@@ -41,6 +41,12 @@
                 class="px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600">
           Editar
         </button>
+        <!-- Botão Excluir -->
+        <button @click="deletePromotion(promotion.id)"
+                class="ml-2 px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700">
+          Excluir
+        </button>
+
       </div>
     </div>
 
@@ -51,7 +57,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import axios from 'axios';
 import { ref, onMounted } from 'vue';
 import PromotionModal from '../../components/PromotionModal.vue';
@@ -91,4 +97,16 @@ function editPromotion(promo) {
   selectedPromotion.value = promo;
   showModal.value = true;
 }
+
+async function deletePromotion(id: number) {
+  if (!confirm("Tem certeza que deseja excluir esta promoção?")) return;
+  try {
+    await axios.delete(`promotions/${id}/`);
+    promotions.value = promotions.value.filter(p => p.id !== id);
+  } catch (err) {
+    console.error("Erro ao excluir promoção:", err);
+    alert("Erro ao excluir promoção.");
+  }
+}
+
 </script>

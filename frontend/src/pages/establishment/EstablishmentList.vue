@@ -46,6 +46,11 @@
                 class="px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600">
           Editar
         </button>
+        <!-- Botão Excluir -->
+        <button @click="deleteEstablishment(establishment.id)"
+                class="ml-2 px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700">
+          Excluir
+        </button>
       </div>
     </div>
 
@@ -56,7 +61,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import axios from 'axios';
 import { ref, onMounted } from 'vue';
 import EstablishmentModal from '../../components/EstablishmentModal.vue';
@@ -96,4 +101,16 @@ function editEstablishment(est) {
   selectedEstablishment.value = est;
   showModal.value = true;
 }
+
+async function deleteEstablishment(id: number) {
+  if (!confirm("Tem certeza que deseja excluir este estabelecimento?")) return;
+  try {
+    await axios.delete(`establishments/${id}/`);
+    establishments.value = establishments.value.filter(e => e.id !== id);
+  } catch (err) {
+    console.error("Erro ao excluir estabelecimento:", err);
+    alert("Erro ao excluir estabelecimento.");
+  }
+}
+
 </script>

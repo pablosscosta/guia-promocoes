@@ -40,7 +40,7 @@ Permite que usuários visualizem ofertas por região, enquanto o cadastro é fei
 - [x] Integração frontend-backend via API REST  
 - [x] Interface pública para cadastro (planejada)  
 - [x] Editar estabelecimentos e promoções
-- [ ] Deletar estabelecimentos e promoções  
+- [x] Deletar estabelecimentos e promoções  
  
 
 ---
@@ -231,7 +231,7 @@ guia-promocoes/
 
 ## ⏭️ Próximas Etapas
 
-- [ ] Funcionalidade de editar e excluir estabelecimentos e promoções.
+- [ ] Implementar filtros para buscas
 
 
 ---
