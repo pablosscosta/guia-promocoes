@@ -34,13 +34,14 @@ Permite que usuários visualizem ofertas por região, enquanto o cadastro é fei
 
 ## 🛠️ Funcionalidades
 
-- [x] Listagem de promoções por região  
-- [x] Cadastro de estabelecimentos via Django Admin ou API  
+- [x] Listagem de estabelecimentos e promoções por região  
+- [x] CRUD de categorias, estabelecimentos e promoções via Django Admin ou API  
 - [x] Painel administrativo para gestão de dados  
 - [x] Integração frontend-backend via API REST  
-- [x] Interface pública para cadastro (planejada)  
-- [x] Editar estabelecimentos e promoções
-- [x] Deletar estabelecimentos e promoções  
+- [x] Criar estabelecimentos e promoções via interface
+- [x] Editar estabelecimentos e promoções via interface
+- [x] Deletar estabelecimentos e promoções via interface  
+- [x] Filtrar estabelecimentos e promoções via interface
  
 
 ---
@@ -84,108 +85,8 @@ python manage.py runserver
 ```
 
 O backend estará acessível em: **http://127.0.0.1:8000/api/**  
-Nesta URL você verá a página do Django REST Framework com os endpoints disponíveis.  
-Popule o banco de dados com dados iniciais via **Django Admin (/admin/)** ou ferramentas como **Postman**.
+Nesta URL você verá a página do Django REST Framework com os endpoints disponíveis.
 
----
-
-### 🧪 População do Banco com Postman
-Após iniciar o servidor, você pode cadastrar dados fictícios para testes usando requisições **POST**.
-
-#### 📌 Endpoints disponíveis
-- Categorias: `http://127.0.0.1:8000/api/categories/`
-- Estabelecimentos: `http://127.0.0.1:8000/api/establishments/`  
-- Promoções: `http://127.0.0.1:8000/api/promotions/`  
-
----
-
-#### 📌 Exemplo: Cadastro de Estabelecimentos
-```json
-{
-  "name": "Bar"
-}
-```
-
-```json
-{
-  "name": "Restaurante"
-}
-```
-
-```json
-{
-  "name": "Pizzaria"
-}
-```
-
-```json
-{
-  "name": "Cafeteria"
-}
-```
-
----
-
-#### 📌 Exemplo: Cadastro de Estabelecimentos
-```json
-{
-  "name": "Estabelecimento Genérico A",
-  "phone_number": "(00) 00000-0000",
-  "address": "Rua Exemplo, 100",
-  "categories": [1]
-}
-```
-
-```json
-{
-  "name": "Estabelecimento Genérico B",
-  "phone_number": "(11) 11111-1111",
-  "address": "Avenida Modelo, 200",
-  "categories": [2]
-}
-```
-
----
-
-#### 📌 Exemplo: Cadastro de Promoções
-Promoções vinculadas ao **Estabelecimento Genérico A** (ID = 1):
-```json
-{
-  "title": "Promoção Teste 1",
-  "description": "Descrição fictícia da promoção 1.",
-  "establishment": 1
-}
-```
-
-```json
-{
-  "title": "Promoção Teste 2",
-  "description": "Descrição fictícia da promoção 2.",
-  "establishment": 1
-}
-```
-
-Promoções vinculadas ao **Estabelecimento Genérico B** (ID = 2):
-```json
-{
-  "title": "Promoção Teste 3",
-  "description": "Descrição fictícia da promoção 3.",
-  "establishment": 2
-}
-```
-
-```json
-{
-  "title": "Promoção Teste 4",
-  "description": "Descrição fictícia da promoção 4.",
-  "establishment": 2
-}
-```
-
-> ⚠️ Observação:
-
-- O campo `establishment` deve referenciar o **ID** retornado pelo cadastro dos estabelecimentos.
-- O campo `categories` deve referenciar os **IDs** das categorias previamente cadastradas.
 
 ---
 
@@ -231,7 +132,7 @@ guia-promocoes/
 
 ## ⏭️ Próximas Etapas
 
-- [ ] Implementar filtros para buscas
+- [ ] Autenticação de usuários
 
 
 ---
