@@ -28,7 +28,7 @@
            class="bg-white rounded-lg shadow-md p-6 border-t-4 border-blue-500 hover:shadow-lg transition-shadow duration-300">
         <h2 class="text-xl font-semibold text-gray-900 mb-2">{{ promotion.title }}</h2>
         <p class="text-gray-600 mb-1"> {{ promotion.description }}</p>
-        <p class="text-gray-800 mb-3">Estabelecimento: {{ promotion.establishment }}</p>
+        <p class="text-gray-800 mb-3">Estabelecimento: {{ promotion.establishment_name }}</p>
       </div>
     </div>
 

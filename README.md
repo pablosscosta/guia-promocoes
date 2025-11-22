@@ -39,8 +39,7 @@ Permite que usuários visualizem ofertas por região, enquanto o cadastro é fei
 - [x] Painel administrativo para gestão de dados  
 - [x] Integração frontend-backend via API REST  
 - [ ] Interface pública para cadastro (planejada)  
-- [ ] Autenticação de usuários finais (planejada)  
-- [ ] Melhorias de responsividade no frontend (planejada)  
+ 
 
 ---
 
@@ -230,7 +229,7 @@ guia-promocoes/
 
 ## ⏭️ Próximas Etapas
 
-- [ ] 
+- [ ] Funcionalidade de editar e excluir estabelecimentos e promoções.
 
 
 ---

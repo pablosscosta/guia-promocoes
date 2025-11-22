@@ -77,7 +77,7 @@ async function submitForm() {
       name: name.value,
       phone_number: phone.value,
       address: address.value,
-      categories: selectedCategories.value,
+      category_ids: selectedCategories.value,
     };
     await axios.post("establishments/", payload);
     emit("saved");
