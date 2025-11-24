@@ -34,14 +34,11 @@ Permite que usuários visualizem ofertas por região, enquanto o cadastro é fei
 
 ## 🛠️ Funcionalidades
 
-- [x] Listagem de estabelecimentos e promoções por região  
-- [x] CRUD de categorias, estabelecimentos e promoções via Django Admin ou API  
+- [x] Listagem e filtros de estabelecimentos e promoções via interface (texto, estabelecimento, categoria)  
+- [x] CRUD de categorias, estabelecimentos e promoções via Django Admin ou interface  
 - [x] Painel administrativo para gestão de dados  
 - [x] Integração frontend-backend via API REST  
-- [x] Criar estabelecimentos e promoções via interface
-- [x] Editar estabelecimentos e promoções via interface
-- [x] Deletar estabelecimentos e promoções via interface  
-- [x] Filtrar estabelecimentos e promoções via interface
+
  
 
 ---
