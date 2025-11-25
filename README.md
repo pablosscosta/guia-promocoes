@@ -38,8 +38,8 @@ Permite que usuários visualizem ofertas por região, enquanto o cadastro é fei
 - [x] CRUD de categorias, estabelecimentos e promoções via Django Admin ou interface  
 - [x] Painel administrativo para gestão de dados  
 - [x] Integração frontend-backend via API REST  
+- [x] Autenticação e autorização de usuários (login, cadastro, permissões por objeto)
 
- 
 
 ---
 
@@ -129,7 +129,7 @@ guia-promocoes/
 
 ## ⏭️ Próximas Etapas
 
-- [ ] Autenticação de usuários
+- [ ] Integração do frontend com autenticação (login/cadastro, consumo do /auth/me/)
 
 
 ---
