@@ -45,7 +45,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, computed, watch } from "vue";
-import axios from "axios";
+import api from '../services/api';
 
 const emit = defineEmits(["close", "saved"]);
 const props = defineProps<{
@@ -66,7 +66,7 @@ const establishments = ref<{ id: number; name: string }[]>([]);
 const loading = ref(false);
 
 onMounted(async () => {
-  const res = await axios.get("establishments/");
+  const res = await api.get("establishments/");
   establishments.value = res.data;
 });
 
@@ -94,9 +94,9 @@ async function submitForm() {
     };
 
     if (isEdit.value && props.promotion) {
-      await axios.put(`promotions/${props.promotion.id}/`, payload);
+      await api.put(`promotions/${props.promotion.id}/`, payload);
     } else {
-      await axios.post("promotions/", payload);
+      await api.post("promotions/", payload);
     }
 
     emit("saved");

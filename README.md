@@ -28,18 +28,17 @@ Permite que usuários visualizem ofertas por região, enquanto o cadastro é fei
 - TypeScript  
 - HTML  
 - CSS  
-- PostgreSQL  
+- SQLite  
 
 ---
 
 ## 🛠️ Funcionalidades
 
-- [x] Listagem e filtros de estabelecimentos e promoções via interface (texto, estabelecimento, categoria)  
-- [x] CRUD de categorias, estabelecimentos e promoções via Django Admin ou interface  
-- [x] Painel administrativo para gestão de dados  
+- [x] Autenticação e autorização (login, cadastro, permissões por objeto)  
 - [x] Integração frontend-backend via API REST  
-- [x] Autenticação e autorização de usuários (login, cadastro, permissões por objeto)
-
+- [x] CRUD completo de categorias, estabelecimentos e promoções  
+- [x] Listagem e filtros funcionando na interface  
+- [x] Painel administrativo pronto para gestão de dados
 
 ---
 
@@ -129,7 +128,7 @@ guia-promocoes/
 
 ## ⏭️ Próximas Etapas
 
-- [ ] Integração do frontend com autenticação (login/cadastro, consumo do /auth/me/)
+- [ ] Padronização de UI/UX (definição de paleta de cores, tipografia e componentes base responsivos)
 
 
 ---

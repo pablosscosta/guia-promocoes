@@ -104,7 +104,7 @@
 </template>
 
 <script setup lang="ts">
-import axios from 'axios';
+import api from '../../services/api';
 import { ref, onMounted, computed } from 'vue';
 import PromotionModal from '../../components/PromotionModal.vue';
 
@@ -148,7 +148,7 @@ const filteredPromotions = computed(() => {
 
 onMounted(async () => {
   try {
-    const response = await axios.get('promotions/');
+    const response = await api.get('promotions/');
     promotions.value = response.data;
   } catch (err: any) {
     error.value = err;
@@ -160,7 +160,7 @@ onMounted(async () => {
 
 function onPromotionSaved() {
   loading.value = true;
-  axios.get('promotions/')
+  api.get('promotions/')
     .then(res => promotions.value = res.data)
     .catch(err => {
       error.value = err;
@@ -182,7 +182,7 @@ function editPromotion(promo: any) {
 async function deletePromotion(id: number) {
   if (!confirm("Tem certeza que deseja excluir esta promoção?")) return;
   try {
-    await axios.delete(`promotions/${id}/`);
+    await api.delete(`promotions/${id}/`);
     promotions.value = promotions.value.filter(p => p.id !== id);
   } catch (err) {
     console.error("Erro ao excluir promoção:", err);

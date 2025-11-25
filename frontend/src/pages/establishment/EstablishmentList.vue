@@ -106,7 +106,7 @@
 </template>
 
 <script setup lang="ts">
-import axios from 'axios';
+import api from '../../services/api';
 import { ref, onMounted, computed } from 'vue';
 import EstablishmentModal from '../../components/EstablishmentModal.vue';
 
@@ -144,7 +144,7 @@ const filteredEstablishments = computed(() => {
 
 onMounted(async () => {
   try {
-    const response = await axios.get('establishments/');
+    const response = await api.get('establishments/');
     establishments.value = response.data;
   } catch (err) {
     error.value = err;
@@ -156,7 +156,7 @@ onMounted(async () => {
 
 function onEstablishmentSaved() {
   loading.value = true;
-  axios.get('establishments/')
+  api.get('establishments/')
     .then(res => establishments.value = res.data)
     .catch(err => {
       error.value = err;
@@ -178,7 +178,7 @@ function editEstablishment(est: any) {
 async function deleteEstablishment(id: number) {
   if (!confirm("Tem certeza que deseja excluir este estabelecimento?")) return;
   try {
-    await axios.delete(`establishments/${id}/`);
+    await api.delete(`establishments/${id}/`);
     establishments.value = establishments.value.filter(e => e.id !== id);
   } catch (err) {
     console.error("Erro ao excluir estabelecimento:", err);

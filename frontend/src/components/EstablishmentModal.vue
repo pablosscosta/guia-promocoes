@@ -52,7 +52,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, computed, watch } from "vue";
-import axios from "axios";
+import api from '../services/api';
 
 const emit = defineEmits(["close", "saved"]);
 const props = defineProps<{
@@ -75,7 +75,7 @@ const categories = ref<{ id: number; name: string }[]>([]);
 const loading = ref(false);
 
 onMounted(async () => {
-  const res = await axios.get("categories/");
+  const res = await api.get("categories/");
   categories.value = res.data;
 });
 
@@ -105,9 +105,9 @@ async function submitForm() {
     };
 
     if (isEdit.value && props.establishment) {
-      await axios.put(`establishments/${props.establishment.id}/`, payload);
+      await api.put(`establishments/${props.establishment.id}/`, payload);
     } else {
-      await axios.post("establishments/", payload);
+      await api.post("establishments/", payload);
     }
 
     emit("saved");

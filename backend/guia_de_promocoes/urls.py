@@ -10,9 +10,9 @@ urlpatterns = [
     path('api/', include(router.urls)),
 
     # rotas de autenticação
-    path('auth/login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
-    path('auth/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
-    path('auth/register/', RegisterView.as_view(), name='register'),
-    path("auth/me/", me, name="me"),
-    path("auth/me/details/", MeDetailsView.as_view(), name="me-details"),
+    path('api/auth/login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/auth/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
+    path('api/auth/register/', RegisterView.as_view(), name='register'),
+    path("api/auth/me/", me, name="me"),
+    path("api/auth/me/details/", MeDetailsView.as_view(), name="me-details"),
 ]
