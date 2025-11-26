@@ -1,23 +1,29 @@
 <template>
   <div class="container mx-auto p-4">
-    <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">
+    
+    <!-- Título principal -->
+    <h1 class="text-3xl font-bold text-neutral-dark mb-6 text-center">
       Nossas Promoções
     </h1>
 
+    <!-- Ações principais -->
     <div class="flex justify-center mb-6 space-x-6">
+      <!-- Botão cadastrar -->
       <button
         @click="openCreateModal"
-        class="px-6 py-2 bg-green-600 text-white font-semibold rounded-lg shadow-md hover:bg-green-700 transition-colors duration-300"
+        class="px-6 py-2 bg-success-600 text-white font-semibold rounded-lg shadow-md hover:bg-success-700 transition-colors duration-300"
       >
         Cadastrar Promoção
       </button>
 
+      <!-- Botão retornar -->
       <router-link
         to="/"
-        class="px-6 py-2 bg-gray-500 text-white font-semibold rounded-lg shadow-md hover:bg-gray-600 transition-colors duration-300"
+        class="flex items-center gap-2 px-6 py-2 bg-neutral-dark text-white font-semibold rounded-lg shadow-md hover:bg-neutral-dark/80 transition-colors duration-300"
       >
-        Retornar
+        ⬅️ Retornar
       </router-link>
+
     </div>
 
     <!-- Modal -->
@@ -28,10 +34,11 @@
       @saved="onPromotionSaved"
     />
 
-    <p v-if="loading" class="text-center text-lg text-blue-600">
+    <!-- Mensagens de estado -->
+    <p v-if="loading" class="text-center text-lg text-primary-600">
       Carregando promoções...
     </p>
-    <p v-else-if="error" class="text-center text-lg text-red-600">
+    <p v-else-if="error" class="text-center text-lg text-error-600">
       Erro ao carregar promoções: {{ error?.message }}
     </p>
 
@@ -43,12 +50,12 @@
           v-model="searchTerm"
           type="text"
           placeholder="Buscar promoção..."
-          class="px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          class="w-full md:w-1/3 px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-600"
         />
 
         <select
           v-model="selectedEstablishment"
-          class="px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+          class="px-4 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-primary-600"
         >
           <option value="">Todos estabelecimentos</option>
           <option
@@ -66,42 +73,47 @@
         <div
           v-for="promotion in filteredPromotions"
           :key="promotion.id"
-          class="bg-white rounded-lg shadow-md p-6 border-t-4 border-blue-500 hover:shadow-lg transition-shadow duration-300"
+          class="bg-white rounded-lg shadow-md p-6 border-t-4 border-success-600 hover:shadow-lg transition-shadow duration-300"
         >
-          <h2 class="text-xl font-semibold text-gray-900 mb-2">
+          <!-- Título da promoção -->
+          <h2 class="text-xl font-semibold text-neutral-dark mb-2">
             {{ promotion.title }}
           </h2>
-          <p class="text-gray-600 mb-1">{{ promotion.description }}</p>
-          <p class="text-gray-800 mb-3">
+          <!-- Descrição -->
+          <p class="text-neutral-dark/70 mb-1">{{ promotion.description }}</p>
+          <!-- Estabelecimento -->
+          <p class="text-neutral-dark mb-3">
             Estabelecimento: {{ promotion.establishment_name }}
           </p>
 
           <!-- Botão Editar -->
           <button
             @click="editPromotion(promotion)"
-            class="px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600"
+            class="px-3 py-1 bg-primary-600 text-white rounded hover:bg-warning-600"
           >
-            Editar
+            ✏️ Editar
           </button>
           <!-- Botão Excluir -->
           <button
             @click="deletePromotion(promotion.id)"
-            class="ml-2 px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700"
+            class="ml-2 px-3 py-1 bg-secondary-600 text-white rounded hover:bg-error-700"
           >
-            Excluir
+            🗑️ Excluir
           </button>
         </div>
       </div>
 
+      <!-- Mensagem lista vazia -->
       <p
         v-if="!loading && !error && filteredPromotions.length === 0"
-        class="text-center text-lg text-gray-500 mt-8"
+        class="text-center text-lg text-neutral-dark/60 mt-8"
       >
         Nenhuma promoção encontrada.
       </p>
     </div>
   </div>
 </template>
+
 
 <script setup lang="ts">
 import api from '../../services/api';

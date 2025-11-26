@@ -1,38 +1,63 @@
 <template>
-  <div class="flex flex-col items-center justify-center min-h-[calc(100vh-8rem)] p-4">
-    <h1 class="text-4xl font-bold text-purple-700 mb-6">Cadastro</h1>
-    <form @submit.prevent="handleRegister" class="w-full max-w-sm space-y-4">
-      <div>
-        <label for="username" class="block text-gray-700">Usuário</label>
-        <input
-          id="username"
-          v-model="username"
-          type="text"
-          required
-          class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
-        />
-      </div>
+  <!-- Container principal da página de cadastro -->
+  <div class="flex flex-col items-center justify-center min-h-[calc(100vh-8rem)] p-4 bg-gradient-to-br from-neutral-light via-white to-primary-50">
+    
+    <!-- Card central -->
+    <div class="w-full max-w-sm bg-white/90 rounded-lg shadow-lg p-8">
+      
+      <!-- Título da página -->
+      <h1 class="text-3xl font-bold text-secondary-700 mb-6 text-center">Cadastro</h1>
+      
+      <!-- Formulário de cadastro -->
+      <form @submit.prevent="handleRegister" class="space-y-4">
+        
+        <!-- Campo usuário -->
+        <div>
+          <label for="username" class="block text-neutral-dark font-medium mb-1">Usuário</label>
+          <input
+            id="username"
+            v-model="username"
+            type="text"
+            required
+            class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary-600"
+          />
+        </div>
 
-      <div>
-        <label for="password" class="block text-gray-700">Senha</label>
-        <input
-          id="password"
-          v-model="password"
-          type="password"
-          required
-          class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500"
-        />
-      </div>
+        <!-- Campo senha -->
+        <div>
+          <label for="password" class="block text-neutral-dark font-medium mb-1">Senha</label>
+          <input
+            id="password"
+            v-model="password"
+            type="password"
+            required
+            class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary-600"
+          />
+        </div>
 
-      <button
-        type="submit"
-        class="w-full px-4 py-2 bg-purple-600 text-white font-semibold rounded-lg shadow-md hover:bg-purple-700 transition-colors duration-300"
-      >
-        Cadastrar
-      </button>
-    </form>
+        <!-- Botão de envio -->
+        <button
+          type="submit"
+          class="w-full px-4 py-2 bg-secondary-600 text-white font-semibold rounded-lg shadow-md hover:bg-secondary-700 transition-colors duration-300"
+        >
+          Cadastrar
+        </button>
+      </form>
+
+      <!-- Botão de retornar -->
+      <div class="mt-6 flex flex-col justify-center items-center gap-4">
+        <router-link
+          to="/"
+          class="inline-flex items-center gap-1 px-3 py-1 bg-neutral-dark text-white rounded hover:bg-neutral-dark/80 transition-colors"
+        >
+          ⬅️ Retornar
+        </router-link>
+      </div>
+    </div>
   </div>
 </template>
+
+
 
 <script setup lang="ts">
 import { ref } from 'vue'
