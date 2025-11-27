@@ -85,21 +85,6 @@
           <p class="text-neutral-dark mb-3">
             Estabelecimento: {{ promotion.establishment_name }}
           </p>
-
-          <!-- Botão Editar -->
-          <button
-            @click="editPromotion(promotion)"
-            class="px-3 py-1 bg-primary-600 text-white rounded hover:bg-warning-600"
-          >
-            ✏️ Editar
-          </button>
-          <!-- Botão Excluir -->
-          <button
-            @click="deletePromotion(promotion.id)"
-            class="ml-2 px-3 py-1 bg-secondary-600 text-white rounded hover:bg-error-700"
-          >
-            🗑️ Excluir
-          </button>
         </div>
       </div>
 

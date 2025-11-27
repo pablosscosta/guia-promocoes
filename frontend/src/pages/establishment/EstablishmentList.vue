@@ -88,21 +88,6 @@
               {{ c.name }}
             </span>
           </div>
-
-          <!-- Botão Editar -->
-          <button
-            @click="editEstablishment(establishment)"
-            class="px-3 py-1 bg-primary-600 text-white rounded hover:bg-warning-600"
-          >
-            ✏️ Editar
-          </button>
-          <!-- Botão Excluir -->
-          <button
-            @click="deleteEstablishment(establishment.id)"
-            class="ml-2 px-3 py-1 bg-secondary-600 text-white rounded hover:bg-error-700"
-          >
-            🗑️ Excluir
-          </button>
         </div>
       </div>
 
