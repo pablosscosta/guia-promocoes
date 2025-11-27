@@ -46,7 +46,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { useRouter } from 'vue-router'
-import api from '../services/api'
+import api from '../../services/api'
 
 const router = useRouter()
 const user = ref<any>(null)
@@ -55,7 +55,6 @@ const loading = ref(true)
 onMounted(async () => {
   try {
     const response = await api.get('/auth/me/')
-    user.value = response.data
   } catch (error) {
     console.error('Erro ao carregar dados do usuário:', error)
     router.push('/login')

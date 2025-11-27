@@ -62,6 +62,8 @@
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import api from '../services/api'
+import { useAuthStore } from '../store/auth'
+
 
 const router = useRouter()
 
@@ -75,8 +77,25 @@ const handleLogin = async () => {
       password: password.value,
     })
 
-    localStorage.setItem('access_token', response.data.access)
-    router.push('/dashboard')
+    const userData = {
+      username: username.value,
+      role: response.data.role,
+      token: response.data.access
+    }
+
+    const auth = useAuthStore()
+    auth.setUser(userData)
+
+    localStorage.setItem('refresh_token', response.data.refresh)
+
+    if (response.data.role) {
+      localStorage.setItem('role', response.data.role)
+    }
+    if (response.data.role === 'estabelecimento'){
+      router.push('/dashboard/establishment')
+    } if (response.data.role === 'cliente'){
+      router.push('/dashboard/client')
+    }
   } catch (error) {
     console.error('Erro no login:', error)
     alert('Usuário ou senha inválidos')

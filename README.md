@@ -39,6 +39,8 @@ Permite que usuários visualizem ofertas por região, enquanto o cadastro é fei
 - [x] CRUD completo de categorias, estabelecimentos e promoções  
 - [x] Listagem e filtros funcionando na interface  
 - [x] Painel administrativo pronto para gestão de dados
+- [x] Fluxo diferenciado de dashboards para clientes e estabelecimentos
+
 
 ---
 

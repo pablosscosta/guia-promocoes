@@ -3,9 +3,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import AllowAny, IsAuthenticatedOrReadOnly, IsAuthenticated
 from rest_framework.decorators import api_view, permission_classes
-
+from rest_framework_simplejwt.views import TokenObtainPairView
 from django.contrib.auth.models import User
-
 from .permissions import IsOwnerOrReadOnly
 from .models import Category, Establishment, Promotion
 from .serializers import (
@@ -13,7 +12,8 @@ from .serializers import (
     CategorySerializer,
     EstablishmentSerializer,
     PromotionSerializer,
-    UserSerializer
+    UserSerializer,
+    CustomTokenObtainPairSerializer
 )
 
 
@@ -95,16 +95,21 @@ class MeDetailsView(APIView):
 # -----------------------------
 # Perfil do usuário (resumido)
 # -----------------------------
-@api_view(["GET"])
-@permission_classes([IsAuthenticated])
-def me(request):
-    user = request.user
-    establishments_count = Establishment.objects.filter(owner=user).count()
-    promotions_count = Promotion.objects.filter(owner=user).count()
+class MeSummaryView(APIView):
+    permission_classes = [IsAuthenticated]
 
-    return Response({
-        "id": user.id,
-        "username": user.username,
-        "establishments_count": establishments_count,
-        "promotions_count": promotions_count,
-    })
+    def get(self, request):
+        user = request.user
+        establishments_count = Establishment.objects.filter(owner=user).count()
+        promotions_count = Promotion.objects.filter(owner=user).count()
+
+        return Response({
+            "id": user.id,
+            "username": user.username,
+            "establishments_count": establishments_count,
+            "promotions_count": promotions_count,
+        })
+
+
+class CustomTokenObtainPairView(TokenObtainPairView):
+    serializer_class = CustomTokenObtainPairSerializer

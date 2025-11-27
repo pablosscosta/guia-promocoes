@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
 from core.urls import router
-from core.views import RegisterView, me, MeDetailsView
+from core.views import RegisterView, MeSummaryView, MeDetailsView, CustomTokenObtainPairView
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 
@@ -10,9 +10,9 @@ urlpatterns = [
     path('api/', include(router.urls)),
 
     # rotas de autenticação
-    path('api/auth/login/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
+    path('api/auth/login/', CustomTokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/auth/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
     path('api/auth/register/', RegisterView.as_view(), name='register'),
-    path("api/auth/me/", me, name="me"),
+    path("api/auth/me/", MeSummaryView.as_view(), name="me"),
     path("api/auth/me/details/", MeDetailsView.as_view(), name="me-details"),
 ]

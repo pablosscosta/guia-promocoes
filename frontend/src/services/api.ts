@@ -6,10 +6,13 @@ const api = axios.create({
 })
 
 // Interceptor de requisição: adiciona token
-api.interceptors.request.use((config) => {
-  const token = localStorage.getItem('access_token')
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`
+api.interceptors.request.use(config => {
+  const userData = localStorage.getItem('user')
+  if (userData) {
+    const user = JSON.parse(userData)
+    if (user.token) {
+      config.headers.Authorization = `Bearer ${user.token}`
+    }
   }
   return config
 })
