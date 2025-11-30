@@ -13,13 +13,13 @@ from .serializers import (
     EstablishmentSerializer,
     PromotionSerializer,
     UserSerializer,
-    CustomTokenObtainPairSerializer
+    CustomTokenObtainPairSerializer,
+    MeDetailsSerializer
 )
 
 
-# -----------------------------
+
 # Registro de usuários
-# -----------------------------
 class RegisterView(APIView):
     permission_classes = [AllowAny]
 
@@ -36,17 +36,14 @@ class RegisterView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-# -----------------------------
+
 # Categorias
-# -----------------------------
 class CategoryViewSet(viewsets.ModelViewSet):
     queryset = Category.objects.all()
     serializer_class = CategorySerializer
 
 
-# -----------------------------
 # Estabelecimentos
-# -----------------------------
 class EstablishmentViewSet(viewsets.ModelViewSet):
     queryset = Establishment.objects.all()
     serializer_class = EstablishmentSerializer
@@ -56,9 +53,7 @@ class EstablishmentViewSet(viewsets.ModelViewSet):
         serializer.save(owner=self.request.user)
 
 
-# -----------------------------
 # Promoções
-# -----------------------------
 class PromotionViewSet(viewsets.ModelViewSet):
     queryset = Promotion.objects.all()
     serializer_class = PromotionSerializer
@@ -68,9 +63,8 @@ class PromotionViewSet(viewsets.ModelViewSet):
         serializer.save(owner=self.request.user)
 
 
-# -----------------------------
+
 # Perfil do usuário (detalhado)
-# -----------------------------
 class MeDetailsView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -86,15 +80,15 @@ class MeDetailsView(APIView):
         return Response({
             "id": user.id,
             "username": user.username,
+            "role": user.role,
             "email": user.email,
             "establishments": establishments_data,
             "promotions": promotions_data,
         })
 
 
-# -----------------------------
+
 # Perfil do usuário (resumido)
-# -----------------------------
 class MeSummaryView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -113,3 +107,4 @@ class MeSummaryView(APIView):
 
 class CustomTokenObtainPairView(TokenObtainPairView):
     serializer_class = CustomTokenObtainPairSerializer
+

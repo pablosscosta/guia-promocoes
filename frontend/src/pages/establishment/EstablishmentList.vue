@@ -1,22 +1,12 @@
 <template>
   <div class="container mx-auto p-4">
-    
     <!-- Título principal -->
     <h1 class="text-3xl font-bold text-neutral-dark mb-6 text-center">
       Nossos Estabelecimentos
     </h1>
 
-    <!-- Ações principais -->
-    <div class="flex justify-center mb-6 space-x-6">
-      <!-- Botão cadastrar -->
-      <button
-        @click="openCreateModal"
-        class="px-6 py-2 bg-primary-600 text-white font-semibold rounded-lg shadow-md hover:bg-primary-700 transition-colors duration-300"
-      >
-        Cadastrar Estabelecimento
-      </button>
-
-      <!-- Botão retornar -->
+    <!-- Ações principais (apenas retornar) -->
+    <div class="flex justify-center mb-6">
       <router-link
         to="/"
         class="flex items-center gap-2 px-6 py-2 bg-neutral-dark text-white font-semibold rounded-lg shadow-md hover:bg-neutral-dark/80 transition-colors duration-300"
@@ -24,14 +14,6 @@
         ⬅️ Retornar
       </router-link>
     </div>
-
-    <!-- Modal -->
-    <EstablishmentModal
-      v-if="showModal"
-      :establishment="selectedEstablishment"
-      @close="showModal = false"
-      @saved="onEstablishmentSaved"
-    />
 
     <!-- Mensagens de estado -->
     <p v-if="loading" class="text-center text-lg text-primary-600">
@@ -80,11 +62,14 @@
           </h2>
           <!-- Endereço -->
           <p class="text-neutral-dark/70 mb-1">{{ establishment.address }}</p>
-          
+
           <!-- Categorias -->
           <div class="flex flex-wrap gap-2 mb-3">
-            <span v-for="c in establishment.categories" :key="c.id"
-                  class="px-2 py-1 bg-neutral-light text-neutral-dark rounded-md text-sm">
+            <span
+              v-for="c in establishment.categories"
+              :key="c.id"
+              class="px-2 py-1 bg-neutral-light text-neutral-dark rounded-md text-sm"
+            >
               {{ c.name }}
             </span>
           </div>
@@ -102,39 +87,35 @@
   </div>
 </template>
 
-
 <script setup lang="ts">
 import api from '../../services/api';
 import { ref, onMounted, computed } from 'vue';
-import EstablishmentModal from '../../components/EstablishmentModal.vue';
 
-const establishments = ref([]);
+const establishments = ref<any[]>([]);
 const loading = ref(true);
-const error = ref(null);
-const showModal = ref(false);
-const selectedEstablishment = ref(null);
+const error = ref<any>(null);
 const searchTerm = ref("");
 const selectedCategory = ref("");
 
 const uniqueCategories = computed(() => {
-  const set = new Set();
+  const set = new Set<string>();
   establishments.value.forEach(e => {
     if (e.categories) {
-      e.categories.forEach(c => set.add(c.name));
+      e.categories.forEach((c: any) => set.add(c.name));
     }
   });
   return Array.from(set).sort();
 });
 
 const filteredEstablishments = computed(() => {
-  return establishments.value.filter(e => {
+  return establishments.value.filter((e: any) => {
     const term = searchTerm.value.trim().toLowerCase();
     const matchesSearch =
       !term || (e.name && e.name.toLowerCase().includes(term));
 
     const matchesCategory =
       !selectedCategory.value ||
-      (e.categories && e.categories.some(c => c.name === selectedCategory.value));
+      (e.categories && e.categories.some((c: any) => c.name === selectedCategory.value));
 
     return matchesSearch && matchesCategory;
   });
@@ -144,46 +125,11 @@ onMounted(async () => {
   try {
     const response = await api.get('establishments/');
     establishments.value = response.data;
-  } catch (err) {
+  } catch (err: any) {
     error.value = err;
     console.error("Erro ao buscar estabelecimentos:", err);
   } finally {
     loading.value = false;
   }
 });
-
-function onEstablishmentSaved() {
-  loading.value = true;
-  api.get('establishments/')
-    .then(res => {
-      establishments.value = res.data
-      alert("Estabelecimento salvo com sucesso!")
-    })
-    .catch(err => {
-      error.value = err;
-      console.error("Erro ao atualizar estabelecimentos:", err);
-    })
-    .finally(() => loading.value = false);
-}
-
-function openCreateModal() {
-  selectedEstablishment.value = null;
-  showModal.value = true;
-}
-
-function editEstablishment(est: any) {
-  selectedEstablishment.value = est;
-  showModal.value = true;
-}
-
-async function deleteEstablishment(id: number) {
-  if (!confirm("Tem certeza que deseja excluir este estabelecimento?")) return;
-  try {
-    await api.delete(`establishments/${id}/`);
-    establishments.value = establishments.value.filter(e => e.id !== id);
-  } catch (err) {
-    console.error("Erro ao excluir estabelecimento:", err);
-    alert("Erro ao excluir estabelecimento.");
-  }
-}
 </script>

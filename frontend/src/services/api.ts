@@ -5,14 +5,11 @@ const api = axios.create({
   baseURL: 'http://127.0.0.1:8000/api/',
 })
 
-// Interceptor de requisição: adiciona token
+// Interceptor de requisição: adiciona token JWT
 api.interceptors.request.use(config => {
-  const userData = localStorage.getItem('user')
-  if (userData) {
-    const user = JSON.parse(userData)
-    if (user.token) {
-      config.headers.Authorization = `Bearer ${user.token}`
-    }
+  const token = localStorage.getItem('token')
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`
   }
   return config
 })
@@ -23,7 +20,7 @@ api.interceptors.response.use(
   (error) => {
     if (error.response && error.response.status === 401) {
       // Token inválido ou expirado → remove e redireciona
-      localStorage.removeItem('access_token')
+      localStorage.removeItem('token')
       router.push('/login')
     }
     return Promise.reject(error)

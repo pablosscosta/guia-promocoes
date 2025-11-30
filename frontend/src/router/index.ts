@@ -8,35 +8,35 @@ import DashboardEstablishment from '../components/dashboard/DashboardEstablishme
 import DashboardClient from '../components/dashboard/DashboardClient.vue'
 import { useAuthStore } from '../store/auth'
 
-const routes= [
-    { path: '/', component: Home},
-    { path: '/establishments', component: EstablishmentList},
-    { path: '/promotions', component: PromotionList},
-    { path: '/login', component: Login},
-    { path: '/register', component: Register},
-    { path: '/dashboard/establishment', component: DashboardEstablishment},
-    { path: '/dashboard/client', component: DashboardClient}
+const routes = [
+  { path: '/', name: 'Home', component: Home },
+  { path: '/establishments', name: 'Establishments', component: EstablishmentList },
+  { path: '/promotions', name: 'Promotions', component: PromotionList },
+  { path: '/login', name: 'Login', component: Login },
+  { path: '/register', name: 'Register', component: Register },
+  { path: '/dashboard/establishment', name: 'DashboardEstablishment', component: DashboardEstablishment },
+  { path: '/dashboard/client', name: 'DashboardClient', component: DashboardClient }
 ]
 
 const router = createRouter({
-    history: createWebHistory(),
-    routes,
+  history: createWebHistory(),
+  routes,
 })
 
-router.beforeEach((to, _from, next) => {
+router.beforeEach(async (to, _from, next) => {
   const auth = useAuthStore()
-  auth.loadUser()
+  await auth.loadUser()
 
-  if (to.path.startsWith('/dashboard')) {
+  if (typeof to.name === "string" && to.name.startsWith("Dashboard")) {
     if (!auth.user) {
-      next('/login')
+      next({ name: "Login" })
     } else {
-      if (to.path === '/dashboard/establishment' && auth.user.role === 'estabelecimento') {
+      if (to.name === "DashboardEstablishment" && auth.user.role === "estabelecimento") {
         next()
-      } else if (to.path === '/dashboard/client' && auth.user.role === 'cliente') {
+      } else if (to.name === "DashboardClient" && auth.user.role === "cliente") {
         next()
       } else {
-        next('/login')
+        next({ name: "Login" })
       }
     }
   } else {
@@ -44,5 +44,4 @@ router.beforeEach((to, _from, next) => {
   }
 })
 
-
-export default router;
+export default router

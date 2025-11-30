@@ -9,7 +9,7 @@
       <h1 class="text-3xl font-bold text-primary-700 mb-6 text-center">Login</h1>
       
       <!-- Formulário de login -->
-      <form @submit.prevent="handleLogin" class="space-y-4">
+      <form @submit.prevent="login" class="space-y-4">
         
         <!-- Campo usuário -->
         <div>
@@ -57,48 +57,39 @@
   </div>
 </template>
 
-
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
-import api from '../services/api'
-import { useAuthStore } from '../store/auth'
+import { ref } from "vue";
+import api from "../services/api";
+import { useAuthStore } from "../store/auth";
+import { useRouter } from "vue-router";
 
+const username = ref("");
+const password = ref("");
+const error = ref("");
+const router = useRouter();
+const auth = useAuthStore();
 
-const router = useRouter()
-
-const username = ref('')
-const password = ref('')
-
-const handleLogin = async () => {
+async function login() {
   try {
-    const response = await api.post('/auth/login/', {
+    const { data } = await api.post("/auth/login/", {
       username: username.value,
       password: password.value,
-    })
+    });
 
-    const userData = {
-      username: username.value,
-      role: response.data.role,
-      token: response.data.access
+    // salvar token
+    localStorage.setItem("token", data.access);
+
+    // carregar usuário
+    await auth.loadUser();
+
+    // redirecionar conforme role
+    if (auth.user && auth.user.role === "estabelecimento") {
+      router.push({ name: "DashboardEstablishment" });
+    } else if (auth.user && auth.user.role === "cliente") {
+      router.push({ name: "DashboardClient" });
     }
-
-    const auth = useAuthStore()
-    auth.setUser(userData)
-
-    localStorage.setItem('refresh_token', response.data.refresh)
-
-    if (response.data.role) {
-      localStorage.setItem('role', response.data.role)
-    }
-    if (response.data.role === 'estabelecimento'){
-      router.push('/dashboard/establishment')
-    } if (response.data.role === 'cliente'){
-      router.push('/dashboard/client')
-    }
-  } catch (error) {
-    console.error('Erro no login:', error)
-    alert('Usuário ou senha inválidos')
+  } catch (err: any) {
+    error.value = "Credenciais inválidas";
   }
 }
 </script>
